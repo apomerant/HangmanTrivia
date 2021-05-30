@@ -1,13 +1,14 @@
+/**
 public class HomeFrame{
   
   JFrame homeFrame = new JFrame("Home");
-  homeFrame.setSize(500,600);
-  homeFrame.setVisible(true);
-  homeFrame.setLayout(null);
+  this.homeFrame.setSize(500,600);
+  this.homeFrame.setVisible(true);
+  this.homeFrame.setLayout(null);
 
   JPanel homePanel = new JPanel();
-  homePanel.setBounds(0, 0, 500, 600);
-  homePanel.setLayout(new BoxLayout(homePanel, BoxLayout.Y_AXIS));
+  this.homePanel.setBounds(0, 0, 500, 600);
+  this.homePanel.setLayout(new BoxLayout(homePanel, BoxLayout.Y_AXIS));
 
   JLabel welcomeLbl = new JLabel("Welcome to hangman trivia!");
   JButton instructionsBtn = new JButton("Instructions");
@@ -39,8 +40,11 @@ public class HomeFrame{
   });
 
   this.homeFrame.add(homePanel);
-  
+
   this.homePanel.add(welcomeLbl);
   this.homePanel.add(instructionsBtn);
   this.homePanel.add(playBtn);
+
 }
+
+*/
