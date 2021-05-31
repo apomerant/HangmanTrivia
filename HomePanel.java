@@ -2,15 +2,16 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.*;
-
-
+import java.awt.*;
+import java.awt.event.*;
 
 public class HomePanel extends JPanel{
   public JLabel welcomeLbl;
   public JButton instructionsBtn;
   public JButton playBtn;
+  
 
-  public HomePanel() {
+  public HomePanel(JFrame homeFrame, JFrame instructionsFrame) {
     super();
     this.setBounds(0, 0, 500, 150);
     this.setVisible(true);
@@ -23,4 +24,16 @@ public class HomePanel extends JPanel{
     this.add(welcomeLbl);
     this.add(instructionsBtn);
     this.add(playBtn);
-  }}
+  
+
+    instructionsBtn.addActionListener(new ActionListener(){
+      public void actionPerformed(ActionEvent homeToInstructions) {
+        homeFrame.setVisible(false);
+        instructionsFrame.setVisible(true);
+        System.out.println("Button was pressed");
+      }
+    });
+
+  }
+  
+}
