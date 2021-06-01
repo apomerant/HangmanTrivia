@@ -10,9 +10,9 @@ public class InstructionsPanel extends JPanel{
   public JButton homeBtn;
   public JButton playBtn;
 
-  public InstructionsPanel(JFrame homeFrame, JFrame instructionsFrame) {
+  public InstructionsPanel(JFrame homeFrame, JFrame instructionsFrame, JFrame playFrame) {
     super();
-    this.setBounds(0, 0, 500, 150);
+    this.setBounds(0, 0, 450, 150);
     this.setVisible(true);
     this.setLayout(new BoxLayout (this, BoxLayout.Y_AXIS));
     //creating buttons on play screen
@@ -28,7 +28,13 @@ public class InstructionsPanel extends JPanel{
       public void actionPerformed(ActionEvent instructionsToHome) {
         instructionsFrame.setVisible(false);
         homeFrame.setVisible(true);
-        System.out.println("Button was pressed");
+      }
+    });
+
+    playBtn.addActionListener(new ActionListener(){
+      public void actionPerformed(ActionEvent instructionsToHome) {
+        instructionsFrame.setVisible(false);
+        playFrame.setVisible(true);
       }
     });
 

@@ -11,9 +11,9 @@ public class HomePanel extends JPanel{
   public JButton playBtn;
   
 
-  public HomePanel(JFrame homeFrame, JFrame instructionsFrame) {
+  public HomePanel(JFrame homeFrame, JFrame instructionsFrame, JFrame playFrame) {
     super();
-    this.setBounds(0, 0, 500, 150);
+    this.setBounds(0, 0, 450, 150);
     this.setVisible(true);
     this.setLayout(new BoxLayout (this, BoxLayout.Y_AXIS));
     //creating buttons on play screen
@@ -30,7 +30,13 @@ public class HomePanel extends JPanel{
       public void actionPerformed(ActionEvent homeToInstructions) {
         homeFrame.setVisible(false);
         instructionsFrame.setVisible(true);
-        System.out.println("Button was pressed");
+      }
+    });
+
+    playBtn.addActionListener(new ActionListener(){
+      public void actionPerformed(ActionEvent homeToPlay) {
+        homeFrame.setVisible(false);
+        playFrame.setVisible(true);
       }
     });
 
