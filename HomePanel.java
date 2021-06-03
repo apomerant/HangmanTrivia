@@ -13,7 +13,7 @@ public class HomePanel extends JPanel{
 
   public HomePanel(JFrame homeFrame, JFrame instructionsFrame, JFrame playFrame) {
     super();
-    this.setBounds(0, 0, 450, 150);
+    this.setBounds(0, 0, 400, 150);
     this.setVisible(true);
     this.setLayout(new BoxLayout (this, BoxLayout.Y_AXIS));
     //creating buttons on play screen
