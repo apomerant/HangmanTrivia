@@ -1,6 +1,8 @@
 import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
+import java.lang.*;
+
 
 
 public class GuessValidator{
@@ -24,5 +26,10 @@ public class GuessValidator{
     else if (lengthOfInput < 1){
       JOptionPane.showMessageDialog(frame, "You need to enter a charcter to make a guess.", "Woopsie!", JOptionPane.WARNING_MESSAGE);
     }
+    else if (Character.isDigit(guessString.toCharArray()[0])){
+      JOptionPane.showMessageDialog(frame, "This character is a number. It's not valid", "Oh no!", JOptionPane.WARNING_MESSAGE);
+    }
+    
   }
+  
 }

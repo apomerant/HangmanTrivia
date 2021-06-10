@@ -68,7 +68,7 @@ public class PlayPanel extends JPanel{
       public void actionPerformed(ActionEvent playerGuessing) {
         String guessString = guessFieldTxt.getText();
         validator.validate(guessString);
-        String newResult = gameProgress.guessCharacter(guessString.charAt(0));
+        String newResult = gameProgress.guessCharacter(guessString.toUpperCase().charAt(0));
         gameResultLbl.setText(newResult);
         if (gameProgress.isGameOver()){
           System.out.println("You win");
