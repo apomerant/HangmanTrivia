@@ -4,6 +4,8 @@ import javax.swing.JPanel;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.lang.*;
+import java.util.*;
 
 public class PlayPanel extends JPanel{
   public JButton instructionsBtn;
@@ -70,6 +72,12 @@ public class PlayPanel extends JPanel{
         validator.validate(guessString);
         String newResult = gameProgress.guessCharacter(guessString.toUpperCase().charAt(0));
         gameResultLbl.setText(newResult);
+        Iterator<Character> n = gameProgress.wrongGuessSet.iterator();
+        gameProgress.wrongGuessBuilder.setLength(0); 
+        while(n.hasNext()){
+          gameProgress.wrongGuessBuilder.append(n.next()).append("\t");
+        }
+        System.out.println(gameProgress.wrongGuessBuilder);
         if (gameProgress.isGameOver()){
           System.out.println("You win");
         }

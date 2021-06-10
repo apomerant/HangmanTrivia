@@ -1,7 +1,11 @@
+import java.util.*;
+
 public class GameProgress{
   String answer;
   String gameResult;
   int lettersRemaining;
+  HashSet<Character> wrongGuessSet = new HashSet(); 
+  StringBuilder wrongGuessBuilder = new StringBuilder(); 
 
   public GameProgress(String answer){
     this.answer = answer;
@@ -22,8 +26,13 @@ public class GameProgress{
         resultArray[i] = guess;
         lettersRemaining--;
       }
+      else{
+        this.wrongGuessSet.add(guess);
+      }
+      
 
     }
+    
     this.gameResult = String.valueOf(resultArray);
     return this.gameResult;
   }
