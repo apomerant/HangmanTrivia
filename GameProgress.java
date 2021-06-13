@@ -1,4 +1,5 @@
 import java.util.*;
+import javax.swing.JFrame;
 
 public class GameProgress{
   String answer;
@@ -6,12 +7,18 @@ public class GameProgress{
   int lettersRemaining;
   HashSet<Character> wrongGuessSet = new HashSet(); 
   StringBuilder wrongGuessBuilder = new StringBuilder(); 
+  public GuessValidator validator;
+  public JFrame playFrame;
 
-  public GameProgress(String answer){
+
+  public GameProgress(String answer, JFrame playFrame){
     this.answer = answer;
     char [] result = this.answer.toCharArray();
     this.lettersRemaining = result.length;
+    this.playFrame = playFrame;
+    this.validator = new GuessValidator(playFrame);
     
+
     for(int i = 0; i < result.length; i++){
       result[i] = '-';
     }
@@ -21,14 +28,17 @@ public class GameProgress{
   public String guessCharacter(char guess){
     char [] answerArray = this.answer.toCharArray();
     char [] resultArray = this.gameResult.toCharArray();
+    
+
+    this.wrongGuessSet.add(guess);
     for(int i = 0; i < answerArray.length; i++){
       if (guess == answerArray[i]){
         resultArray[i] = guess;
         lettersRemaining--;
+        this.wrongGuessSet.remove(guess);
       }
-      else{
-        this.wrongGuessSet.add(guess);
-      }
+      
+    
       
 
     }

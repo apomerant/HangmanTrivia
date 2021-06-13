@@ -18,13 +18,14 @@ public class PlayPanel extends JPanel{
   public GuessValidator validator;
   public JLabel gameResultLbl;
   public GameProgress gameProgress;
+  public JLabel wrongGuessLbl;
   
 
   public PlayPanel(JFrame homeFrame, JFrame instructionsFrame, JFrame playFrame) {
     super();
     
     //creating buttons on play screen
-    this.questionLbl = new JLabel("Question is here");
+    this.questionLbl = new JLabel(question);
     this.instructionsBtn = new JButton("Instructions");
     this.homeBtn = new JButton("Home");
     this.guessBtn = new JButton ("Guess");
@@ -32,8 +33,9 @@ public class PlayPanel extends JPanel{
     this.question = question;
     this.validator = new GuessValidator(playFrame);
     this.answer = answer;
-    this.gameProgress = new GameProgress(answer);
+    this.gameProgress = new GameProgress(answer, playFrame);
     this.gameResultLbl = new JLabel(this.gameProgress.getGameResult());
+    this.wrongGuessLbl = new JLabel("Wrong guesses: ");
 
 
     this.setBounds(0, 0, 400, 30);
@@ -48,6 +50,7 @@ public class PlayPanel extends JPanel{
     this.add(instructionsBtn);
     this.add(homeBtn);
     this.add(gameResultLbl);
+    this.add(wrongGuessLbl);
   
 
     instructionsBtn.addActionListener(new ActionListener(){
@@ -69,15 +72,18 @@ public class PlayPanel extends JPanel{
       @Override
       public void actionPerformed(ActionEvent playerGuessing) {
         String guessString = guessFieldTxt.getText();
-        validator.validate(guessString);
+        if(!validator.isValid(guessString)){
+          return;
+        }
         String newResult = gameProgress.guessCharacter(guessString.toUpperCase().charAt(0));
         gameResultLbl.setText(newResult);
         Iterator<Character> n = gameProgress.wrongGuessSet.iterator();
         gameProgress.wrongGuessBuilder.setLength(0); 
         while(n.hasNext()){
-          gameProgress.wrongGuessBuilder.append(n.next()).append("\t");
+          gameProgress.wrongGuessBuilder.append(n.next()).append("     ");
         }
-        System.out.println(gameProgress.wrongGuessBuilder);
+        String wrongGuessStr = "Wrong guesses: " + gameProgress.wrongGuessBuilder.toString();
+        wrongGuessLbl.setText(wrongGuessStr);
         if (gameProgress.isGameOver()){
           System.out.println("You win");
         }
