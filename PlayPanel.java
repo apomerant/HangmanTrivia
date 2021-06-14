@@ -19,23 +19,30 @@ public class PlayPanel extends JPanel{
   public JLabel gameResultLbl;
   public GameProgress gameProgress;
   public JLabel wrongGuessLbl;
+  public GetTrivia getTrivia;
   
 
   public PlayPanel(JFrame homeFrame, JFrame instructionsFrame, JFrame playFrame) {
     super();
     
     //creating buttons on play screen
-    this.questionLbl = new JLabel(question);
+    this.getTrivia = new GetTrivia("QuestionAnswer.txt");
+    
     this.instructionsBtn = new JButton("Instructions");
     this.homeBtn = new JButton("Home");
     this.guessBtn = new JButton ("Guess");
     this.guessFieldTxt = new JTextField("");
-    this.question = question;
+    
     this.validator = new GuessValidator(playFrame);
+    this.question = question;
+    question = getTrivia.getQuestion();
     this.answer = answer;
+    answer = getTrivia.getAnswer();
+    this.questionLbl = new JLabel(question);
     this.gameProgress = new GameProgress(answer, playFrame);
     this.gameResultLbl = new JLabel(this.gameProgress.getGameResult());
     this.wrongGuessLbl = new JLabel("Wrong guesses: ");
+    
 
 
     this.setBounds(0, 0, 400, 30);
@@ -51,6 +58,10 @@ public class PlayPanel extends JPanel{
     this.add(homeBtn);
     this.add(gameResultLbl);
     this.add(wrongGuessLbl);
+
+    //setting question and answer
+    
+    
   
 
     instructionsBtn.addActionListener(new ActionListener(){
