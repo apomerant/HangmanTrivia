@@ -34,10 +34,10 @@ public class PlayPanel extends JPanel{
     this.guessFieldTxt = new JTextField("");
     
     this.validator = new GuessValidator(playFrame);
-    this.question = question;
-    question = getTrivia.getQuestion();
-    this.answer = answer;
-    answer = getTrivia.getAnswer();
+    TriviaQuestion trivia = getTrivia.getRandomQuestion();
+    this.question = trivia.question;
+    this.answer = trivia.answer;
+    
     this.questionLbl = new JLabel(question);
     this.gameProgress = new GameProgress(answer, playFrame);
     this.gameResultLbl = new JLabel(this.gameProgress.getGameResult());

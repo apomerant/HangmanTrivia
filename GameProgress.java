@@ -37,10 +37,6 @@ public class GameProgress{
         lettersRemaining--;
         this.wrongGuessSet.remove(guess);
       }
-      
-    
-      
-
     }
     
     this.gameResult = String.valueOf(resultArray);

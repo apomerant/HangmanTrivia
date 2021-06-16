@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.lang.*;
 
 
-
 public class GuessValidator{
   public JFrame frame;
   
@@ -14,11 +13,7 @@ public class GuessValidator{
 
   public boolean isValid(String guessString) {
     char [] guessCharArray = guessString.toCharArray();
-    for (char c : guessCharArray) {
-      System.out.println(c);
-    }
     int lengthOfInput = guessCharArray.length;
-    System.out.println("Length: " + lengthOfInput);
     if (lengthOfInput > 1){
       JOptionPane.showMessageDialog(frame, "Too many characters, please try again, with just one character.", "Oops!", JOptionPane.WARNING_MESSAGE);
       return false;

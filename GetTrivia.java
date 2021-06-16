@@ -2,47 +2,48 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
+import java.util.Arrays;
+import java.lang.Object;
+import java.util.Random;
 
 public class GetTrivia{
-  public String answer;
-  public String question;
-  private String fileName;
-  public String [] triviaParts;
   
+  private String fileName;
+  
+  public List<TriviaQuestion> triviaQuestions;
+  
+
   public GetTrivia(String fileName){
-    this.answer = answer;
-    this.question = question;
+    
     this.fileName = fileName;
-    this.triviaParts = triviaParts;
+    
+    this.triviaQuestions = this.readQuestions();
   }
 
-  public String getAnswer(){
+  public List<TriviaQuestion> readQuestions(){
+    List<TriviaQuestion> result = new ArrayList<TriviaQuestion>();
     try{
       BufferedReader reader = new BufferedReader(new FileReader(this.fileName));
 
       String line = null;
       while ((line = reader.readLine()) != null) {
-        triviaParts = line.split(",");
+        
+        String [] triviaParts = line.split(",");
+        TriviaQuestion question = new TriviaQuestion(triviaParts[0], triviaParts[1]);
+        result.add(question);
       }
       reader.close();
     } catch (IOException x) {
       System.err.format("IOException: %s%n", x);
     }
-    return triviaParts[1];
+    return result;
   }
 
-  public String getQuestion(){
-    try{
-      BufferedReader reader = new BufferedReader(new FileReader(this.fileName));
-
-      String line = null;
-      while ((line = reader.readLine()) != null) {
-        triviaParts = line.split(",");
-      }
-      reader.close();
-    } catch (IOException x) {
-      System.err.format("IOException: %s%n", x);
-    }
-    return triviaParts[0];
+  public TriviaQuestion getRandomQuestion(){
+    int max = this.triviaQuestions.size();
+    int min = 0;
+    
+    int index = (int)Math.floor(Math.random()*(max-min+1)+min);
+    return this.triviaQuestions.get(index);
   }
 }
