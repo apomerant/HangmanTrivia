@@ -9,6 +9,7 @@ public class GameProgress{
   StringBuilder wrongGuessBuilder = new StringBuilder(); 
   public GuessValidator validator;
   public JFrame playFrame;
+  public int guessesLeft;
 
 
   public GameProgress(String answer, JFrame playFrame){
@@ -17,6 +18,7 @@ public class GameProgress{
     this.lettersRemaining = result.length;
     this.playFrame = playFrame;
     this.validator = new GuessValidator(playFrame);
+    this.guessesLeft = 5;
     
 
     for(int i = 0; i < result.length; i++){
@@ -29,18 +31,49 @@ public class GameProgress{
     char [] answerArray = this.answer.toCharArray();
     char [] resultArray = this.gameResult.toCharArray();
     
-
-    this.wrongGuessSet.add(guess);
+    boolean found = false;
+    int foundCount = 0;
+    boolean previouslyGuessed = false;
     for(int i = 0; i < answerArray.length; i++){
-      if (guess == answerArray[i]){
+      if (guess == resultArray[i]){
+        previouslyGuessed = true;
+      }
+      else if (guess == answerArray[i]){
         resultArray[i] = guess;
-        lettersRemaining--;
-        this.wrongGuessSet.remove(guess);
+        found = true;
+        foundCount++;
       }
     }
-    
+    if (!previouslyGuessed){
+      if (!found){
+        this.guessesLeft--;
+        this.wrongGuessSet.add(guess);
+      }
+      else{
+        this.lettersRemaining -= foundCount;
+      }
+    }
+        
     this.gameResult = String.valueOf(resultArray);
     return this.gameResult;
+  }
+
+  public String getGameProgress(){
+    if (this.isGameOver()){
+      if (this.lettersRemaining == 0){
+        return "You win!";
+      }
+      else{
+        return "Loser";
+      }
+    }
+    else if (this.guessesLeft > 0){
+      return "You have " + this.guessesLeft + " guesses left";
+    }
+    else{
+      return "";
+    }
+    
   }
 
   public String getGameResult(){
@@ -48,6 +81,6 @@ public class GameProgress{
   }
 
   public boolean isGameOver(){
-    return this.lettersRemaining == 0;
+    return this.lettersRemaining == 0 || this.guessesLeft == 0;
   }
 }

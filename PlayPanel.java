@@ -20,7 +20,7 @@ public class PlayPanel extends JPanel{
   public GameProgress gameProgress;
   public JLabel wrongGuessLbl;
   public GetTrivia getTrivia;
-  
+  public JLabel progressLbl;  
 
   public PlayPanel(JFrame homeFrame, JFrame instructionsFrame, JFrame playFrame) {
     super();
@@ -42,6 +42,7 @@ public class PlayPanel extends JPanel{
     this.gameProgress = new GameProgress(answer, playFrame);
     this.gameResultLbl = new JLabel(this.gameProgress.getGameResult());
     this.wrongGuessLbl = new JLabel("Wrong guesses: ");
+    this.progressLbl = new JLabel(this.gameProgress.getGameProgress());
     
 
 
@@ -58,6 +59,7 @@ public class PlayPanel extends JPanel{
     this.add(homeBtn);
     this.add(gameResultLbl);
     this.add(wrongGuessLbl);
+    this.add(progressLbl);
 
     //setting question and answer
     
@@ -89,14 +91,16 @@ public class PlayPanel extends JPanel{
         String newResult = gameProgress.guessCharacter(guessString.toUpperCase().charAt(0));
         gameResultLbl.setText(newResult);
         Iterator<Character> n = gameProgress.wrongGuessSet.iterator();
+        
         gameProgress.wrongGuessBuilder.setLength(0); 
         while(n.hasNext()){
           gameProgress.wrongGuessBuilder.append(n.next()).append("     ");
         }
         String wrongGuessStr = "Wrong guesses: " + gameProgress.wrongGuessBuilder.toString();
         wrongGuessLbl.setText(wrongGuessStr);
+        progressLbl.setText(gameProgress.getGameProgress());
         if (gameProgress.isGameOver()){
-          System.out.println("You win");
+          guessBtn.setEnabled(false);
         }
       }
     });
