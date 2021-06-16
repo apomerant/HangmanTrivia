@@ -17,7 +17,7 @@ public class HomePanel extends JPanel{
     this.setVisible(true);
     this.setLayout(new BoxLayout (this, BoxLayout.Y_AXIS));
     //creating buttons on play screen
-    this.welcomeLbl = new JLabel("Welcome to hangman trivia");
+    this.welcomeLbl = new JLabel("Welcome to Hangman Trivia!");
     this.instructionsBtn = new JButton("Instructions");
     this.playBtn = new JButton("Play!");
 

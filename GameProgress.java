@@ -18,7 +18,7 @@ public class GameProgress{
     this.lettersRemaining = result.length;
     this.playFrame = playFrame;
     this.validator = new GuessValidator(playFrame);
-    this.guessesLeft = 5;
+    this.guessesLeft = 3;
     
 
     for(int i = 0; i < result.length; i++){

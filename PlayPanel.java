@@ -55,12 +55,11 @@ public class PlayPanel extends JPanel{
     this.add(questionLbl);
     this.add(guessFieldTxt);
     this.add(guessBtn);
-    this.add(instructionsBtn);
-    this.add(homeBtn);
     this.add(gameResultLbl);
     this.add(wrongGuessLbl);
     this.add(progressLbl);
-
+    this.add(instructionsBtn);
+    this.add(homeBtn);
     //setting question and answer
     
     
