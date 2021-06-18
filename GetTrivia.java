@@ -20,6 +20,7 @@ public class GetTrivia{
     this.triviaQuestions = this.readQuestions();
   }
 
+  //turns each line in text file into question+answer
   public List<TriviaQuestion> readQuestions(){
     List<TriviaQuestion> result = new ArrayList<TriviaQuestion>();
     try{
@@ -39,6 +40,7 @@ public class GetTrivia{
     return result;
   }
 
+  //randomly chooses which line of text file to use as question and answer
   public TriviaQuestion getRandomQuestion(){
     int max = this.triviaQuestions.size();
     int min = 0;

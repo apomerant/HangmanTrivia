@@ -21,35 +21,34 @@ public class PlayPanel extends JPanel{
   public JLabel wrongGuessLbl;
   public GetTrivia getTrivia;
   public JLabel progressLbl;  
+  public JButton restartBtn;
 
   public PlayPanel(JFrame homeFrame, JFrame instructionsFrame, JFrame playFrame) {
     super();
     
-    //creating buttons on play screen
+    //creating buttons, JLabels and txt field on play screen
+    //initializes other classes in this class
     this.getTrivia = new GetTrivia("QuestionAnswer.txt");
-    
-    this.instructionsBtn = new JButton("Instructions");
-    this.homeBtn = new JButton("Home");
-    this.guessBtn = new JButton ("Guess");
-    this.guessFieldTxt = new JTextField("");
-    
     this.validator = new GuessValidator(playFrame);
     TriviaQuestion trivia = getTrivia.getRandomQuestion();
     this.question = trivia.question;
     this.answer = trivia.answer;
-    
+
+    this.instructionsBtn = new JButton("Instructions");
+    this.homeBtn = new JButton("Home");
+    this.guessBtn = new JButton ("Guess");
+    this.guessFieldTxt = new JTextField("");
     this.questionLbl = new JLabel(question);
+    this.wrongGuessLbl = new JLabel("Wrong guesses: ");
+    this.restartBtn = new JButton("Restart");
+
     this.gameProgress = new GameProgress(answer, playFrame);
     this.gameResultLbl = new JLabel(this.gameProgress.getGameResult());
-    this.wrongGuessLbl = new JLabel("Wrong guesses: ");
     this.progressLbl = new JLabel(this.gameProgress.getGameProgress());
     
-
-
     this.setBounds(0, 0, 400, 30);
     this.setVisible(true);
     this.setLayout(new BoxLayout (this, BoxLayout.Y_AXIS));
-    //come back and check if this set the size correctly
     guessFieldTxt.setMaximumSize(new Dimension(100, 30));
 
     this.add(questionLbl);
@@ -58,20 +57,16 @@ public class PlayPanel extends JPanel{
     this.add(gameResultLbl);
     this.add(wrongGuessLbl);
     this.add(progressLbl);
+    this.add(restartBtn);
     this.add(instructionsBtn);
     this.add(homeBtn);
-    //setting question and answer
     
-    
-  
-
     instructionsBtn.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent playToInstructions) {
         playFrame.setVisible(false);
         instructionsFrame.setVisible(true);
       }
     });
-    
 
     homeBtn.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent playToHome) {
@@ -101,6 +96,32 @@ public class PlayPanel extends JPanel{
         if (gameProgress.isGameOver()){
           guessBtn.setEnabled(false);
         }
+      }
+    });
+
+    restartBtn.addActionListener(new ActionListener(){
+      public void actionPerformed(ActionEvent restart) {
+        System.out.println("reset");
+        
+        TriviaQuestion trivia = getTrivia.getRandomQuestion();
+        answer = trivia.answer;
+        char [] result = answer.toCharArray();
+        for(int i = 0; i < result.length; i++){
+          result[i] = '-';
+        }
+        
+        String gameResult = String.valueOf(result);
+        
+        question = trivia.question;
+        questionLbl.setText(question);
+        gameProgress = new GameProgress(answer, playFrame);
+        
+        gameResultLbl.setText(gameResult);
+        gameProgress.wrongGuessSet.clear();
+        gameProgress.guessesLeft = 3;
+        wrongGuessLbl.setText("Wrong guesses: ");
+        progressLbl.setText("You have 3 guesses left");
+        guessBtn.setEnabled(true);
       }
     });
 

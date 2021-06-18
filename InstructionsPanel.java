@@ -42,6 +42,7 @@ public class InstructionsPanel extends JPanel{
 
   }
 
+  //sets text of the instructions screen
   public String toString(){
     StringBuffer sb = new StringBuffer();
     sb.append("The goal of Hangman Trivia is to answer the trivia \n");

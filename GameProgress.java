@@ -20,17 +20,26 @@ public class GameProgress{
     this.validator = new GuessValidator(playFrame);
     this.guessesLeft = 3;
     
-
+    //setting up initial dashes on screen for the answer word
     for(int i = 0; i < result.length; i++){
       result[i] = '-';
     }
     this.gameResult = String.valueOf(result);
   }
 
+  public String initializeDash(String answer){
+    char [] result = answer.toCharArray();
+    for(int i = 0; i < result.length; i++){
+      result[i] = '-';
+    }
+    return String.valueOf(result);
+  }
+
   public String guessCharacter(char guess){
     char [] answerArray = this.answer.toCharArray();
     char [] resultArray = this.gameResult.toCharArray();
     
+    //runs after user inputs a guess
     boolean found = false;
     int foundCount = 0;
     boolean previouslyGuessed = false;
@@ -58,6 +67,7 @@ public class GameProgress{
     return this.gameResult;
   }
 
+  //ending game or showing wrong guesses that are left
   public String getGameProgress(){
     if (this.isGameOver()){
       if (this.lettersRemaining == 0){
